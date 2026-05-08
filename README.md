@@ -1,0 +1,87 @@
+Current Status
+
+Research preview: v0.1.0-vertical-slice
+
+This release demonstrates:
+
+package import
+synthetic transport generation
+lifted phase construction
+RevA v2-SF gate evaluation
+wrong-sign, phase-shuffle, and residue-scramble controls
+anchor irregularity diagnostics
+integer winding diagnostics
+Markdown report export
+pytest validation
+Install
+
+From the repository root:
+
+pip install -e ".[dev]"
+Quickstart
+
+Run:
+
+python examples/quickstart/01_minimal_pipeline.py
+
+Expected output:
+
+GEMLA Transport Evaluation
+--------------------------
+RevA v2-SF main pass: True
+Wrong-sign rejected: True
+Phase-shuffle rejected: True
+Residue-scramble rejected: True
+Final verdict: PASS
+
+The script also writes a Markdown report to:
+
+reports/gemla_transport_report.md
+Run Tests
+pytest
+
+Expected result:
+
+4 passed
+Repository Structure
+src/gemla/
+  data/        synthetic input generation
+  lifted/      lifted phase, anchors, winding
+  gates/       RevA v2-SF gate
+  controls/    adversarial controls
+  pipelines/   end-to-end GEMLA pipeline
+  reports/     Markdown report exporter
+
+examples/
+  quickstart/  minimal runnable demo
+
+tests/
+  unit tests for the vertical slice
+Interpretation
+
+The current version is a finite diagnostic SDK. It does not make universal claims. It evaluates whether a supplied trajectory produces a stable lifted transport signature that passes gates and rejects controls.
+
+Roadmap
+Add CLI command: gemla evaluate
+Add benchmark runner
+Add V-JEPA latent transport adapter
+Add market microstructure demo
+Add industrial telemetry demo
+Add cybersecurity event demo
+Add documentation site
+Add public release bundle
+License
+
+See LICENSE.
+
+Citation
+
+See CITATION.cff.
+
+
+Then commit and push:
+
+```powershell
+git add README.md
+git commit -m "Add README quickstart"
+git push
