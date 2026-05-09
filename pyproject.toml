@@ -1,6 +1,6 @@
 [project]
 name = "gemla"
-version = "1.0.rc1"
+version = "1.0.0"
 description = "GEMLA: Γ–EML–α Transport Architecture SDK"
 readme = "README.md"
 requires-python = ">=3.10"
