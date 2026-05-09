@@ -1,4 +1,4 @@
-Current Status
+# Current Status
 
 Research preview: v0.1.0-vertical-slice
 
@@ -61,7 +61,7 @@ Interpretation
 
 The current version is a finite diagnostic SDK. It does not make universal claims. It evaluates whether a supplied trajectory produces a stable lifted transport signature that passes gates and rejects controls.
 
-Roadmap
+# Roadmap
 Add CLI command: gemla evaluate
 Add benchmark runner
 Add V-JEPA latent transport adapter
@@ -70,11 +70,12 @@ Add industrial telemetry demo
 Add cybersecurity event demo
 Add documentation site
 Add public release bundle
-License
+
+# License
 
 See LICENSE.
 
-Citation
+# Citation
 
 See CITATION.cff.
 
@@ -85,3 +86,11 @@ Then commit and push:
 git add README.md
 git commit -m "Add README quickstart"
 git push
+
+## CLI Usage 
+
+After installing the package, run: 
+´´´bash 
+gemla --help ´´´
+
+Run the 
