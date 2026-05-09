@@ -37,9 +37,9 @@ dev = [
 gemla = "gemla.cli.main:main"
 
 [project.urls]
-Homepage = "https://github.com/johnarrackalceles-ui/gemla-sdk"
-Repository = "https://github.com/johnarrackalceles-ui/gemla-sdk"
-Issues = "https://github.com/johnarrackalceles-ui/gemla-sdk/issues"
+Homepage = "https://github.com/Predilytics-inc/gemla-sdk"
+Repository = "https://github.com/Predilytics-inc/gemla-sdk"
+Issues = "https://github.com/Predilytics-inc/gemla-sdk/issues"
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]
