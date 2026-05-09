@@ -14,6 +14,11 @@ from gemla.pipelines import GemlaPipeline
 from gemla.reports import export_markdown_report
 from gemla.integrations.latent import make_synthetic_latents
 from gemla.pipelines import GemlaLatentPipeline
+from gemla.integrations.vjepa import (
+    load_vjepa_embeddings,
+    save_sample_vjepa_like_embeddings,
+)
+
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -144,6 +149,80 @@ def build_parser() -> argparse.ArgumentParser:
         help="Latent component used as imaginary part.",
     )
 
+    evaluate_vjepa = subparsers.add_parser(
+        "evaluate-vjepa",
+        help="Run GEMLA transport evaluation on V-JEPA-style embeddings.",
+    )
+
+    evaluate_vjepa.add_argument(
+        "--input",
+        type=str,
+        default=None,
+        help="Path to a .npy file containing embeddings of shape (n_steps, latent_dim).",
+    )
+
+    evaluate_vjepa.add_argument(
+        "--synthetic",
+        action="store_true",
+        help="Generate synthetic V-JEPA-like embeddings for a demo run.",
+    )
+
+    evaluate_vjepa.add_argument(
+        "--synthetic-output",
+        type=str,
+        default="examples/vjepa_latent_transport/sample_vjepa_like_embeddings.npy",
+        help="Where synthetic V-JEPA-like embeddings will be saved.",
+    )
+
+    evaluate_vjepa.add_argument(
+        "--n",
+        type=int,
+        default=1200,
+        help="Number of synthetic embedding samples.",
+    )
+
+    evaluate_vjepa.add_argument(
+        "--latent-dim",
+        type=int,
+        default=32,
+        help="Synthetic latent dimension.",
+    )
+
+    evaluate_vjepa.add_argument(
+        "--t-max",
+        type=float,
+        default=80.0,
+        help="Maximum synthetic time value.",
+    )
+
+    evaluate_vjepa.add_argument(
+        "--noise",
+        type=float,
+        default=0.01,
+        help="Synthetic embedding noise level.",
+    )
+
+    evaluate_vjepa.add_argument(
+        "--seed",
+        type=int,
+        default=23,
+        help="Synthetic embedding random seed.",
+    )
+
+    evaluate_vjepa.add_argument(
+        "--component-a",
+        type=int,
+        default=0,
+        help="Embedding component used as real part.",
+    )
+
+    evaluate_vjepa.add_argument(
+        "--component-b",
+        type=int,
+        default=1,
+        help="Embedding component used as imaginary part.",
+    )
+
     return parser
 
 
@@ -210,6 +289,9 @@ def main() -> int:
     
     if args.command == "evaluate-latent":
         return run_evaluate_latent(args)
+    
+    if args.command == "evaluate-vjepa":
+        return run_evaluate_vjepa(args)
 
     parser.print_help()
     return 2
@@ -237,6 +319,38 @@ def run_evaluate_latent(args: argparse.Namespace) -> int:
 
     result = pipe.fit_evaluate(latents)
 
+    print(result.summary())
+
+    return 0 if result.verdict else 1
+def run_evaluate_vjepa(args: argparse.Namespace) -> int:
+    if args.synthetic:
+        embedding_path = save_sample_vjepa_like_embeddings(
+            args.synthetic_output,
+            n=args.n,
+            latent_dim=args.latent_dim,
+            t_max=args.t_max,
+            noise=args.noise,
+            seed=args.seed,
+        )
+        embeddings = load_vjepa_embeddings(embedding_path)
+    elif args.input is not None:
+        embedding_path = Path(args.input)
+        embeddings = load_vjepa_embeddings(embedding_path)
+    else:
+        print("Error: provide --input path/to/embeddings.npy or use --synthetic.")
+        return 2
+
+    pipe = GemlaLatentPipeline(
+        component_a=args.component_a,
+        component_b=args.component_b,
+    )
+
+    result = pipe.fit_evaluate(embeddings)
+
+    print("GEMLA V-JEPA-Style Latent Transport Evaluation")
+    print("----------------------------------------------")
+    print(f"Input embeddings: {embedding_path}")
+    print()
     print(result.summary())
 
     return 0 if result.verdict else 1

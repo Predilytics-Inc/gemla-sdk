@@ -34,6 +34,8 @@ src/gemla/gates/winding_gate.py
 src/gemla/integrations/__init__.py
 src/gemla/integrations/latent/__init__.py
 src/gemla/integrations/latent/adapter.py
+src/gemla/integrations/vjepa/__init__.py
+src/gemla/integrations/vjepa/adapter.py
 src/gemla/lifted/__init__.py
 src/gemla/lifted/anchors.py
 src/gemla/lifted/lifted_phase.py
@@ -48,9 +50,11 @@ tests/test_action.py
 tests/test_benchmarks.py
 tests/test_cli.py
 tests/test_cli_benchmark.py
+tests/test_cli_latent.py
 tests/test_controls.py
 tests/test_gamma_operator.py
 tests/test_latent_adapter.py
 tests/test_lifted_phase.py
 tests/test_pipeline.py
 tests/test_reva_v2_sf.py
+tests/test_vjepa_adapter.py
