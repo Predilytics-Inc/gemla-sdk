@@ -92,6 +92,7 @@ benchmarks/runs/
 benchamarks/results_cli/
 experiments/**/results/
 experiments/**/plots/
+examples/vjepa_latent_transport/*.npy
 
 # ----------------------------
 # Large data / model files
