@@ -1,0 +1,2 @@
+[console_scripts]
+gemla = gemla.cli.main:main

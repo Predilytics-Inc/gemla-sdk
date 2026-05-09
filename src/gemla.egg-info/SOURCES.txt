@@ -6,8 +6,11 @@ src/gemla/__version.py
 src/gemla.egg-info/PKG-INFO
 src/gemla.egg-info/SOURCES.txt
 src/gemla.egg-info/dependency_links.txt
+src/gemla.egg-info/entry_points.txt
 src/gemla.egg-info/requires.txt
 src/gemla.egg-info/top_level.txt
+src/gemla/cli/__init__.py
+src/gemla/cli/main.py
 src/gemla/controls/__init__.py
 src/gemla/controls/control_suite.py
 src/gemla/controls/phase_shuffle.py
@@ -32,6 +35,7 @@ src/gemla/lifted/spectral_flatness.py
 src/gemla/lifted/winding.py
 src/gemla/pipelines/__init__.py
 src/gemla/pipelines/gemla_pipeline.py
+src/gemla/reports/__init__.py
 src/gemla/reports/markdown.py
 tests/test_action.py
 tests/test_controls.py
