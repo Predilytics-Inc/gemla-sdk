@@ -6,6 +6,22 @@ The SDK evaluates whether a supplied trajectory produces a stable lifted transpo
 
 ---
 
+## 💖 Support This Project
+
+If this framework is useful or relevant to your work, you can support its continued development:
+
+[![Sponsor](https://img.shields.io/badge/Sponsor-GEMLA-red)](https://github.com/sponsors/Predilytics-Inc)
+
+👉 https://github.com/sponsors/Predilytics-Inc
+
+Sponsorship helps fund:
+- core SDK development
+- research and experimental validation
+- benchmark infrastructure
+- documentation and reproducibility tooling
+
+---
+
 ## Current Status
 
 **Research preview:** `v0.5.0-practical-demos`
