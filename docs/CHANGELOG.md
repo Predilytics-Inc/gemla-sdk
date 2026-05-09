@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.0.0
+
+First stable GEMLA SDK release.
+
+Includes:
+- core GEMLA transport pipeline
+- RevA v2-SF gate
+- adversarial controls
+- anchor and winding diagnostics
+- benchmark suite
+- latent embedding pipeline
+- V-JEPA-style embedding adapter
+- industrial telemetry demo
+- market microstructure demo
+- cyber event transport demo
+- CLI commands
+- Markdown reports
+- GitHub Release artifacts
+- TestPyPI validation
+
 ## v0.5.0 Practical Demos
 
 Added:
