@@ -1,0 +1,116 @@
+# ----------------------------
+# Python cache / bytecode
+# ----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# ----------------------------
+# Virtual environments
+# ----------------------------
+.venv/
+venv/
+env/
+ENV/
+
+# ----------------------------
+# Environment / secrets
+# ----------------------------
+.env
+.env.*
+*.env
+secrets.*
+*.pem
+*.key
+
+# ----------------------------
+# Build / packaging outputs
+# ----------------------------
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# ----------------------------
+# Jupyter
+# ----------------------------
+.ipynb_checkpoints/
+
+# ----------------------------
+# IDE / editor files
+# ----------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ----------------------------
+# Logs
+# ----------------------------
+*.log
+logs/
+
+# ----------------------------
+# Generated reports / runtime outputs
+# ----------------------------
+reports/*.md
+reports/*.html
+reports/*.json
+reports/*.csv
+
+# Keep the reports folder if needed
+!reports/.gitkeep
+
+# ----------------------------
+# Generated plots / figures
+# ----------------------------
+plots/
+figures/generated/
+*.png
+*.jpg
+*.jpeg
+*.svg
+
+# Optional: only ignore generated figures if you do not want them tracked.
+# If docs need committed SVG diagrams, remove *.svg above.
+
+# ----------------------------
+# Benchmark outputs
+# ----------------------------
+benchmarks/results/
+benchmarks/runs/
+experiments/**/results/
+experiments/**/plots/
+
+# ----------------------------
+# Large data / model files
+# ----------------------------
+data/raw/
+data/processed/
+*.npy
+*.npz
+*.parquet
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+
+# ----------------------------
+# OS-specific
+# ----------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+desktop.ini
