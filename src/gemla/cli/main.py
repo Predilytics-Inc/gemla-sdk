@@ -18,6 +18,12 @@ from gemla.integrations.vjepa import (
     load_vjepa_embeddings,
     save_sample_vjepa_like_embeddings,
 )
+from gemla.data import (
+    make_market_microstructure, 
+    make_industrial_telemetry,
+    make_cyber_event_transport,
+    make_synthetic_transport
+)
 
 
 
@@ -223,6 +229,39 @@ def build_parser() -> argparse.ArgumentParser:
         help="Embedding component used as imaginary part.",
     )
 
+    demo_industrial = subparsers.add_parser(
+        "demo-industrial",
+        help="Run the GEMLA industrial telemetry demo.",
+    )
+    demo_industrial.add_argument(
+        "--output",
+        type=str,
+        default="reports/industrial_telemetry_report.md",
+        help="Path where the Markdown report will be written.",
+    )
+
+    demo_market = subparsers.add_parser(
+        "demo-market",
+        help="Run the GEMLA market microstructure demo.",
+    )
+    demo_market.add_argument(
+        "--output",
+        type=str,
+        default="reports/market_microstructure_report.md",
+        help="Path where the Markdown report will be written.",
+    )
+
+    demo_cyber = subparsers.add_parser(
+        "demo-cyber",
+        help="Run the GEMLA cyber event transport demo.",
+    )
+    demo_cyber.add_argument(
+        "--output",
+        type=str,
+        default="reports/cyber_event_transport_report.md",
+        help="Path where the Markdown report will be written.",
+    )
+
     return parser
 
 
@@ -292,6 +331,15 @@ def main() -> int:
     
     if args.command == "evaluate-vjepa":
         return run_evaluate_vjepa(args)
+    
+    if args.command == "demo-industrial":
+        return run_demo_industrial(args)
+
+    if args.command == "demo-market":
+        return run_demo_market(args)
+
+    if args.command == "demo-cyber":
+        return run_demo_cyber(args)
 
     parser.print_help()
     return 2
@@ -352,5 +400,70 @@ def run_evaluate_vjepa(args: argparse.Namespace) -> int:
     print(f"Input embeddings: {embedding_path}")
     print()
     print(result.summary())
+
+    return 0 if result.verdict else 1
+
+def run_demo_industrial(args: argparse.Namespace) -> int:
+    X = make_industrial_telemetry()
+
+    pipe = GemlaPipeline()
+    result = pipe.fit_evaluate(X)
+
+    print("GEMLA Industrial Telemetry Demo")
+    print("-------------------------------")
+    print(result.summary())
+
+    report_path = export_markdown_report(
+        result,
+        output_path=Path(args.output),
+        title="GEMLA Industrial Telemetry Report",
+    )
+
+    print()
+    print(f"Report written to: {report_path}")
+
+    return 0 if result.verdict else 1
+
+
+def run_demo_market(args: argparse.Namespace) -> int:
+    X = make_market_microstructure()
+
+    pipe = GemlaPipeline()
+    result = pipe.fit_evaluate(X)
+
+    print("GEMLA Market Microstructure Demo")
+    print("--------------------------------")
+    print(result.summary())
+
+    report_path = export_markdown_report(
+        result,
+        output_path=Path(args.output),
+        title="GEMLA Market Microstructure Report",
+    )
+
+    print()
+    print(f"Report written to: {report_path}")
+
+    return 0 if result.verdict else 1
+
+
+def run_demo_cyber(args: argparse.Namespace) -> int:
+    X = make_cyber_event_transport()
+
+    pipe = GemlaPipeline()
+    result = pipe.fit_evaluate(X)
+
+    print("GEMLA Cyber Event Transport Demo")
+    print("--------------------------------")
+    print(result.summary())
+
+    report_path = export_markdown_report(
+        result,
+        output_path=Path(args.output),
+        title="GEMLA Cyber Event Transport Report",
+    )
+
+    print()
+    print(f"Report written to: {report_path}")
 
     return 0 if result.verdict else 1
