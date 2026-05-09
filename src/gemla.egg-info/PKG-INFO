@@ -112,3 +112,12 @@ After installing the package, run:
 gemla --help ´´´
 
 Run the 
+
+## Latent Embedding Evaluation
+
+GEMLA can evaluate latent embedding trajectories, including embeddings produced by external video, world-model, or agent-trace encoders.
+
+Run the synthetic latent demo:
+
+```bash
+gemla evaluate-latent
