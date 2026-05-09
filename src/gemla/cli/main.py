@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+import numpy as np
 
 from gemla.benchmarks import (
     run_benchmark_suite,
@@ -11,6 +12,8 @@ from gemla.benchmarks import (
 from gemla.data import make_synthetic_transport
 from gemla.pipelines import GemlaPipeline
 from gemla.reports import export_markdown_report
+from gemla.integrations.latent import make_synthetic_latents
+from gemla.pipelines import GemlaLatentPipeline
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -80,6 +83,67 @@ def build_parser() -> argparse.ArgumentParser:
         help="Directory where benchmark CSV/JSON outputs will be written.",
     )
 
+    evaluate_latent = subparsers.add_parser(
+        "evaluate-latent",
+        help="Run GEMLA transport evaluation on latent embeddings.",
+    )
+
+    evaluate_latent.add_argument(
+        "--input",
+        type=str,
+        default=None,
+        help="Optional .npy file containing latent embeddings of shape (n_steps, latent_dim).",
+    )
+
+    evaluate_latent.add_argument(
+        "--n",
+        type=int,
+        default=1200,
+        help="Number of synthetic latent samples if --input is not provided.",
+    )
+
+    evaluate_latent.add_argument(
+        "--latent-dim",
+        type=int,
+        default=16,
+        help="Synthetic latent dimension if --input is not provided.",
+    )
+
+    evaluate_latent.add_argument(
+        "--t-max",
+        type=float,
+        default=80.0,
+        help="Maximum synthetic time value.",
+    )
+
+    evaluate_latent.add_argument(
+        "--noise",
+        type=float,
+        default=0.01,
+        help="Synthetic latent noise level.",
+    )
+
+    evaluate_latent.add_argument(
+        "--seed",
+        type=int,
+        default=17,
+        help="Synthetic latent random seed.",
+    )
+
+    evaluate_latent.add_argument(
+        "--component-a",
+        type=int,
+        default=0,
+        help="Latent component used as real part.",
+    )
+
+    evaluate_latent.add_argument(
+        "--component-b",
+        type=int,
+        default=1,
+        help="Latent component used as imaginary part.",
+    )
+
     return parser
 
 
@@ -143,6 +207,9 @@ def main() -> int:
 
     if args.command == "benchmark":
         return run_benchmark(args)
+    
+    if args.command == "evaluate-latent":
+        return run_evaluate_latent(args)
 
     parser.print_help()
     return 2
@@ -150,3 +217,26 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+def run_evaluate_latent(args: argparse.Namespace) -> int:
+    if args.input is not None:
+        latents = np.load(args.input)
+    else:
+        latents = make_synthetic_latents(
+            n=args.n,
+            latent_dim=args.latent_dim,
+            t_max=args.t_max,
+            noise=args.noise,
+            seed=args.seed,
+        )
+
+    pipe = GemlaLatentPipeline(
+        component_a=args.component_a,
+        component_b=args.component_b,
+    )
+
+    result = pipe.fit_evaluate(latents)
+
+    print(result.summary())
+
+    return 0 if result.verdict else 1
