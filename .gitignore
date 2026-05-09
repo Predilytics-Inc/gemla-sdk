@@ -39,6 +39,8 @@ dist/
 .eggs/
 pip-wheel-metadata/
 .venv-wheel-test/
+*.egg-info/
+src/*.egg-info/
 
 # ----------------------------
 # Jupyter
