@@ -24,6 +24,9 @@ src/gemla/core/eml.py
 src/gemla/core/gamma_operator.py
 src/gemla/core/surrogate.py
 src/gemla/data/__init__.py
+src/gemla/data/cyber.py
+src/gemla/data/industrial.py
+src/gemla/data/market.py
 src/gemla/data/synthetic.py
 src/gemla/gates/__init__.py
 src/gemla/gates/anchor_gate.py
@@ -51,10 +54,14 @@ tests/test_benchmarks.py
 tests/test_cli.py
 tests/test_cli_benchmark.py
 tests/test_cli_latent.py
+tests/test_cli_vjepa.py
 tests/test_controls.py
+tests/test_cyber_demo.py
 tests/test_gamma_operator.py
+tests/test_industrial_demo.py
 tests/test_latent_adapter.py
 tests/test_lifted_phase.py
+tests/test_market_demo.py
 tests/test_pipeline.py
 tests/test_reva_v2_sf.py
 tests/test_vjepa_adapter.py
