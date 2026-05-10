@@ -21,6 +21,12 @@ Sponsorship helps fund:
 - documentation and reproducibility tooling
 
 ---
+# GEMLA-SDK 
+Hybrid Γ–EML–α Architecture SDK for multi-scale dynamics,
+path-based inference, lifted-phase diagnostics, and transport topology analysis.
+
+## Trademark Notice
+GEMLA, Hybrid Γ–EML–α, and related branding are trademarks of Predilytics Inc.
 
 ## Current Status
 
