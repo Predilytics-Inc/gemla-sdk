@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.0
+
+- Aligned package versioning to `1.1.0`.
+- Added public SDK contracts in `gemla.types`.
+- Added shared runtime configuration in `gemla.config`.
+- Added shared SDK exceptions in `gemla.exceptions`.
+- Added API contract and 2.0 roadmap documentation.
+- Added tests for version, configuration, and typed public contracts.
+
+
 ## v1.0.0
 
 First stable GEMLA SDK release.
