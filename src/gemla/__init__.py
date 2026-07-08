@@ -1,9 +1,45 @@
-from importlib.metadata import PackageNotFoundError, version
+from __future__ import annotations
 
 try:
-    __version__ = version("gemla")
-except PackageNotFoundError:
-    # Fallback when running directly from source before installation.
-    __version__ = "0.1.0"
+    from gemla.__version import __version__
+except Exception:  # pragma: no cover
+    try:
+        from importlib.metadata import PackageNotFoundError, version
 
-__all__ = ["__version__"]
+        try:
+            __version__ = version("gemla")
+        except PackageNotFoundError:
+            __version__ = "1.1.0"
+    except Exception:
+        __version__ = "1.1.0"
+
+from gemla.config import GemlaConfig
+from gemla.exceptions import (
+    GemlaConfigurationError,
+    GemlaError,
+    GemlaInputError,
+    GemlaValidationError,
+)
+from gemla.types import (
+    AuditArtifact,
+    ComplexTrajectory,
+    ControlDecision,
+    GateDecision,
+    TrajectoryInput,
+    Verdict,
+)
+
+__all__ = [
+    "__version__",
+    "GemlaConfig",
+    "GemlaError",
+    "GemlaInputError",
+    "GemlaValidationError",
+    "GemlaConfigurationError",
+    "TrajectoryInput",
+    "ComplexTrajectory",
+    "GateDecision",
+    "ControlDecision",
+    "AuditArtifact",
+    "Verdict",
+]
